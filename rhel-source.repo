@@ -1,0 +1,11 @@
+[rhel-http-repo]
+name=RHEL $releasever - $basearch - Source
+baseurl=http://192.168.0.7/pub/rhel68/
+enabled=1
+gpgcheck=0
+
+[epel-repo]
+name=EPEL REpository for RHEL6
+baseurl=https://dl.fedoraproject.org/pub/epel/6/x86_64/
+enabled=0
+gpgcheck=0
