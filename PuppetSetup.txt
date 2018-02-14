@@ -17,7 +17,7 @@ The packages are all named using the following convention:
 puppetlabs-release-COLLECTION-OS-VERSION.noarch.rpm
 Puppet Repository: http://yum.puppetlabs.com
 
-rpm -ivh  http://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
+For CentOS6 x86_64: rpm -ivh  http://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
 
 Install Puppet Server
 ---------------------
