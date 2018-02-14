@@ -1,0 +1,56 @@
+#Puppet4 Installation on Master and Agent - OS CentOS 6
+
+This setup was tested on the following VERSION
+PuppetServer - CentOS release 6.9 (Final)
+Puppet-agent - CentOS release 6.9 (Final)
+
+official documentation:https://docs.puppet.com/puppet/4.0/install_linux.html
+Updated documentation: https://goo.gl/L9Yf8p
+
+#######################################
+#Master installation steps on CentOS6x#
+#######################################
+
+Install a Release Package to Enable Puppet Labs Package Repositories
+First, choose the package based on your specific operating system and version.
+The packages are all named using the following convention:
+puppetlabs-release-COLLECTION-OS-VERSION.noarch.rpm
+Puppet Repository: http://yum.puppetlabs.com
+
+rpm -ivh  http://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
+
+Install Puppet Server
+---------------------
+as root: yum install puppetserver
+
+Start the puppetserver Service
+------------------------------
+as root or sudo: service puppetserver start
+
++-----------------------------+
++Install Puppet on Agent Nodes+
++-----------------------------+
+
+Configure the puppet repository using -
+1) rpm -ivh  http://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
+2) yum install puppet-agent.
+3) sudo /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true.
+4) ln -s /opt/puppetlabs/bin/puppet /usr/bin/
+
+
+Sign Certificates (on the CA Master)
+As each agent runs for the first time, it submits a certificate signing request (CSR) to the CA Puppet master. You’ll need to log into that server to check for certs and sign them.
+
+Run sudo /opt/puppetlabs/bin/puppet cert list to see any outstanding requests.
+Run sudo /opt/puppetlabs/bin/puppet cert sign <NAME> to sign a request.
+After an agent’s cert is signed, it will regularly fetch and apply configurations from the Puppet master.
+
+
+Note:
+While installing puppet sometimes it complains for the following package:libselinux-ruby
+You can download it using the link below
+
+http://rpmfind.net/linux/centos/6.9/os/x86_64/Packages/libselinux-ruby-2.0.94-7.el6.x86_64.rpm
+
+yum localinstall libselinux-ruby-2.0.94-7.el6.x86_64.rpm
+
